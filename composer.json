@@ -1,0 +1,36 @@
+{
+    "name": "hulang/think-api-doc",
+    "description": "API文档自动生成",
+    "license": "Apache-2.0",
+    "keywords": [
+        "think",
+        "apidoc",
+        "api文档",
+        "自动生成"
+    ],
+    "type": "think-extend",
+    "authors": [
+        {
+            "name": "hulang",
+            "email": "hulangfy@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hulang\\apidoc\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "hulang\\apidoc\\Service"
+            ],
+            "config": {
+                "apidoc": "src/config/apidoc.php"
+            }
+        }
+    }
+}
