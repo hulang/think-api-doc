@@ -8,6 +8,7 @@ use think\facade\Route;
 
 class Service extends \think\Service
 {
+    protected $route_prefix = '';
     public function boot(Route $route)
     {
         $this->route_prefix = config('apidoc.route_prefix', '');
