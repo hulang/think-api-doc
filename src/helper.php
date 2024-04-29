@@ -66,8 +66,9 @@ if (!function_exists('tocode')) {
             header('Access-Control-Allow-Origin:*');
             header('Access-Control-Allow-Methods:POST,GET,PUT,DELETE,OPTIONS');
             header('Content-Type:application/json; charset=utf-8');
-            echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            echo (json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
             exit;
+            die;
         }
         return $result;
     }
