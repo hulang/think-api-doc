@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace hulang\apidoc;
 
 use think\facade\Route;
 
 class Parser
 {
-
     /**
      * 解析类
      * @param $object

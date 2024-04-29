@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace hulang\apidoc;
 
 use think\facade\Request;
@@ -7,7 +9,6 @@ use think\facade\View;
 
 class Controller
 {
-
     protected $assets_path = "";
     protected $view_path = '';
     protected $root = '';
