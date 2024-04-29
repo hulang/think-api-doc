@@ -9,7 +9,9 @@ use think\facade\View;
 
 class Controller
 {
-    protected $assets_path = "";
+    protected $assets_path = '';
+    protected $doc = '';
+    protected $route_prefix = '';
     protected $view_path = '';
     protected $root = '';
 
@@ -125,7 +127,7 @@ class Controller
             $data['_header'] = $this->doc->__get('header');
             # 全局参数
             $data['_params'] = $this->doc->__get('params');
-            return totrue($data);
+            return json($data);
         } else {
             return $this->template('action');
         }
@@ -157,10 +159,10 @@ class Controller
 
         if ($method == 'API') {
             $arr = explode('::', $url);
-            return totrue(api($arr[0], $arr[1], $data));
+            return json(api($arr[0], $arr[1], $data));
         }
 
-        return totrue(['params' => $data, 'header' => $header]);
+        return json(['params' => $data, 'header' => $header]);
     }
 
     private function format($data = [])
