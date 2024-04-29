@@ -25,6 +25,7 @@ if (!function_exists('tofalse')) {
         return tocode($code, $message, [], 0, [], $is_json);
     }
 }
+
 if (!function_exists('todata')) {
     /**
      * 返回json错误信息
@@ -36,6 +37,7 @@ if (!function_exists('todata')) {
         return tocode($code, '', $data, $count, [], $is_json);
     }
 }
+
 if (!function_exists('tocode')) {
     /**
      * json返回错误结果
