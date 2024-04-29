@@ -74,8 +74,11 @@ class Controller
         // 左侧菜单
         View::assign('menu', $this->doc->get_api_list(input('version', 0, 'intval')));
     }
-
-    # 解析资源
+    /**
+     * 解析资源
+     *
+     * @return mixed|array|bool
+     */
     public function assets()
     {
         $assets_path = __DIR__ . '/assets/';
@@ -90,20 +93,31 @@ class Controller
             return response($content, 200, ['Content-Length' => strlen($content)])->contentType($type);
         }
     }
-
-    /** 显示模板
+    /**
+     * 显示模板
+     *
+     * @return mixed|array|bool
      */
     protected function template($name, $vars = [], $config = [])
     {
         $vars = array_merge(['root' => $this->root], $vars);
         return View($name);
     }
-
+    /**
+     * [index]模板
+     *
+     * @return mixed|array|bool
+     */
     public function index()
     {
         return $this->template('index');
     }
-
+    /**
+     * 模块
+     * @param string $name 模块名
+     *
+     * @return mixed|array|bool
+     */
     public function module($name = '')
     {
         if (class_exists($name)) {
@@ -116,7 +130,12 @@ class Controller
         }
         return $this->template('module');
     }
-
+    /**
+     * 方法
+     * @param string $name 方法名
+     *
+     * @return mixed|array|bool
+     */
     public function action($name = '')
     {
         if (request()->isAjax()) {
@@ -127,12 +146,17 @@ class Controller
             $data['_header'] = $this->doc->__get('header');
             # 全局参数
             $data['_params'] = $this->doc->__get('params');
-            return json($data);
+            return totrue($data);
         } else {
             return $this->template('action');
         }
     }
-
+    /**
+     * 文档
+     * @param string $name 文档名
+     *
+     * @return mixed|array|bool
+     */
     public function document($name = 'explain')
     {
         if ($name == 'code') {
@@ -144,8 +168,11 @@ class Controller
         // dd($this->template('doc_' . $name));
         return $this->template('doc_' . $name);
     }
-
-    // debug 格式化参数
+    /**
+     * 格式化参数
+     *
+     * @return mixed|array|bool
+     */
     public function format_params()
     {
         $header = $this->format(request()->param('header'));
@@ -159,12 +186,17 @@ class Controller
 
         if ($method == 'API') {
             $arr = explode('::', $url);
-            return json(api($arr[0], $arr[1], $data));
+            return totrue(api($arr[0], $arr[1], $data));
         }
 
-        return json(['params' => $data, 'header' => $header]);
+        return totrue(['params' => $data, 'header' => $header]);
     }
-
+    /**
+     * 格式化
+     * 
+     * @param array $data 数据
+     * @return mixed|array|bool
+     */
     private function format($data = [])
     {
         if (!$data || count($data) < 1) {
@@ -176,7 +208,11 @@ class Controller
         }
         return $result;
     }
-
+    /**
+     * 登陆
+     *
+     * @return mixed|array|bool
+     */
     public function login()
     {
         if (request()->isPost()) {
@@ -194,6 +230,11 @@ class Controller
             }
         }
     }
+    /**
+     * 登陆
+     *
+     * @return mixed|array|bool
+     */
     public function outlogin()
     {
         session($this->route_prefix . '.is_login', null);
