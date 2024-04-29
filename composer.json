@@ -22,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "hulang\\apidoc\\": "src/"
-        }
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
     "extra": {
         "think": {
