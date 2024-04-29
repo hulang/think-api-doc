@@ -3,7 +3,7 @@
     "description": "ThinkPHP 8 API 文档自动生成",
     "license": "Apache-2.0",
     "keywords": [
-        "think",
+        "ThinkPHP",
         "apidoc",
         "api文档",
         "自动生成"
