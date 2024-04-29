@@ -12,7 +12,7 @@ class Parser
      * 解析类
      * @param $object
      *
-     * @return array
+     * @return mixed|array
      */
     public function parse_class($object)
     {
@@ -21,7 +21,7 @@ class Parser
     /**
      * @param \ReflectionClass $object
      *
-     * @return array|bool
+     * @return mixed|array|bool
      */
     public function parse_action($object)
     {
@@ -38,7 +38,7 @@ class Parser
         }
         if (!isset($comment['method']) || !$comment['method']) {
             if (!isset($comment['method'])) {
-                $comment['method'] = '未定义method注释，内容应用默认api方法调用，对外api默认POST';
+                $comment['method'] = '未定义method注释,内容应用默认api方法调用,对外api默认POST';
             }
         }
         $comment['href'] = "{$object->class}::{$object->name}";
@@ -75,7 +75,7 @@ class Parser
      *
      * @param string $comment
      *
-     * @return array
+     * @return mixed|array
      */
     private function comment2Array($comment = '')
     {
@@ -93,7 +93,7 @@ class Parser
      *
      * @param array $array
      *
-     * @return array
+     * @return mixed|array
      */
     private function parseCommentArray(array $array = [])
     {
