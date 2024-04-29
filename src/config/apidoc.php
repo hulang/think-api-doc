@@ -3,7 +3,7 @@ return [
     'title' => 'Api Doc', # 文档title
     'version' => '1.0.0', # 文档版本
     'copyright' => 'Powered By hulangfy@163.com', # 版权信息
-    'password' => '123123', # 访问密码,为空不需要密码
+    'password' => '123456', # 访问密码,为空不需要密码
     'route_prefix' => 'api_doc', // 路由前缀 通过访问 /table 访问表格页面
     'save' => 'file', // 默认 存储类型
     'engine' => [
