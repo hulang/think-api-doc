@@ -186,7 +186,7 @@ class Controller
 
         if ($method == 'API') {
             $arr = explode('::', $url);
-            return totrue(api($arr[0], $arr[1], $data));
+            return totrue($arr[0], $arr[1], $data);
         }
 
         return totrue(['params' => $data, 'header' => $header]);
