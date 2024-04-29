@@ -63,7 +63,7 @@ class Doc
      *
      * @access public
      *
-     * @param  array $config 配置参数
+     * @param array $config 配置参数
      */
     public function __construct($config = [])
     {
@@ -75,9 +75,9 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name 配置名称
+     * @param string $name 配置名称
      *
-     * @return mixed    配置值
+     * @return mixed 配置值
      */
     public function __get($name = null)
     {
@@ -93,8 +93,8 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name  配置名称
-     * @param  string $value 配置值
+     * @param string $name  配置名称
+     * @param string $value 配置值
      *
      * @return void
      */
@@ -110,16 +110,23 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name 配置名称
+     * @param string $name 配置名称
      *
-     * @return bool
+     * @return mixed|bool
      */
     public function __isset($name)
     {
         return isset($this->config[$name]);
     }
-
-    # 获取接口列表
+    /**
+     * 获取接口列表
+     *
+     * @access public
+     *
+     * @param int $version 版本
+     *
+     * @return mixed|bool
+     */
     public function get_api_list($version = 0)
     {
         $list = [];
@@ -162,7 +169,7 @@ class Doc
      * @param string $class
      * @param string $action
      *
-     * @return array|bool
+     * @return mixed|array|bool
      */
     public function get_api_detail($class = '', $action = '')
     {
@@ -176,7 +183,7 @@ class Doc
      * @param string $class
      * @param string $action
      *
-     * @return array|bool
+     * @return mixed|array|bool
      */
     protected function listDirFiles($app, $isapp = true)
     {
