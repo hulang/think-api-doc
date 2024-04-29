@@ -51,7 +51,7 @@ class Controller
         View::assign('web', $this->doc->__get());
         View::assign('route_prefix', $this->route_prefix);
 
-        $this->assets_path = $this->doc->__get("static_path") ?: '/static/' . $this->route_prefix;
+        $this->assets_path = $this->doc->__get('static_path') ?: '/static/' . $this->route_prefix;
         View::assign('assets', $this->assets_path);
         $this->root = request()->root() ?: request()->domain();
         if (
@@ -79,10 +79,10 @@ class Controller
     public function assets()
     {
         $assets_path = __DIR__ . '/assets/';
-        $path = str_replace($this->route_prefix . "/assets", "", request()->pathinfo());
+        $path = str_replace($this->route_prefix . '/assets', '', request()->pathinfo());
         $ext = request()->ext();
         if ($ext) {
-            $type = "text/html";
+            $type = 'text/html';
             $content = file_get_contents($assets_path . $path);
             if (array_key_exists($ext, $this->mimeType)) {
                 $type = $this->mimeType[$ext];
@@ -120,7 +120,7 @@ class Controller
     public function action($name = '')
     {
         if (request()->isAjax()) {
-            list($class, $action) = explode("::", $name);
+            list($class, $action) = explode('::', $name);
             $data = $this->doc->get_api_detail($class, $action);
             $data['is_header'] = $this->doc->__get('is_header');
             # 全局header
@@ -149,8 +149,8 @@ class Controller
     public function format_params()
     {
         $header = $this->format(request()->param('header'));
-        // $header["Cookie"] = request()->param('cookie');
-        // $header["token"] = request()->param('token');
+        // $header['Cookie'] = request()->param('cookie');
+        // $header['token'] = request()->param('token');
 
         $url = request()->param('url');
         $method = request()->param('method');
