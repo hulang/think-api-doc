@@ -16,13 +16,13 @@ class Service extends \think\Service
                 Route::any('/', function () {
                     return redirect($this->route_prefix . '/document?name=explain');
                 });
-                Route::get('assets', "\\x_mier\\apidoc\\Controller@assets", ['deny_ext' => 'php|.htacess']);
-                Route::get('module', "\\x_mier\\apidoc\\Controller@module");
-                Route::get('action', "\\x_mier\\apidoc\\Controller@action");
-                Route::get('document', "\\x_mier\\apidoc\\Controller@document");
-                Route::any('login$', "\\x_mier\\apidoc\\Controller@login");
-                Route::any('outlogin$', "\\x_mier\\apidoc\\Controller@outlogin");
-                Route::any('format_params', "\\x_mier\\apidoc\\Controller@format_params");
+                Route::get('assets', "\\hulang\\apidoc\\Controller@assets", ['deny_ext' => 'php|.htacess']);
+                Route::get('module', "\\hulang\\apidoc\\Controller@module");
+                Route::get('action', "\\hulang\\apidoc\\Controller@action");
+                Route::get('document', "\\hulang\\apidoc\\Controller@document");
+                Route::any('login$', "\\hulang\\apidoc\\Controller@login");
+                Route::any('outlogin$', "\\hulang\\apidoc\\Controller@outlogin");
+                Route::any('format_params', "\\hulang\\apidoc\\Controller@format_params");
             });
         });
     }
