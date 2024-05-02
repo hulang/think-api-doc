@@ -12,7 +12,7 @@ class Controller
 
     protected $assets_path = '';
     protected $view_path = '';
-    protected $doc = '';
+    protected $doc;
     protected $route_prefix = '';
     protected $root = '';
 

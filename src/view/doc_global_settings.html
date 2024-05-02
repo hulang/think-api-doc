@@ -43,17 +43,20 @@
 {/block}
 {block name='js'}
 <script>
-    layui.use(['form'], function () {
-        var $ = layui.jquery;
-        var form = layui.form;
-        var header = localStorage.getItem('header');
-        form.val('demo-filter', JSON.parse(header));
-        form.on('submit(demo-val)', function (data) {
-            var field = data.field;
-            localStorage.setItem('header', JSON.stringify(field));
-            layer.msg('保存成功', { icon: 6, time: 1000 });
-            return false;
+layui.use(function() {
+    var $ = layui.jquery;
+    var form = layui.form;
+    var header = localStorage.getItem('header');
+    form.val('demo-filter', JSON.parse(header));
+    form.on('submit(demo-val)', function(data) {
+        var field = data.field;
+        localStorage.setItem('header', JSON.stringify(field));
+        layer.msg('保存成功', {
+            icon: 6,
+            time: 1000
         });
+        return false;
     });
+});
 </script>
 {/block}

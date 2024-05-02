@@ -71,82 +71,78 @@
         </div>
         <div class="site-mobile-shade"></div>
         {block name="footer"}
-        <!-- {/*include file="footer"?* /} -->
         {/block}
     </div>
-    <script src="{$assets}/layui/layui.js"></script>
-    <script src="/{$route_prefix}/assets/json-viewer.min.js"></script>
-    <script src="/{$route_prefix}/assets/clipboard.min.js"></script>
-    <script>
-        document.onreadystatechange = function () {
-            if (document.readyState == "complete") {
-                document.body.style.display = "block";
-            } else {
-                document.body.style.display = "none";
-            };
-        };
-    </script>
-    <script>
-        layui.use(['element', 'form'], function () {
-            var element = layui.element,
-                $ = layui.jquery,
-                form = layui.form;
-            form.on('select(component)', function (item) {
-                window.location.href = item.value;
-            });
-            $('.site-tree-mobile').click(function (e) {
-                $('body').addClass("site-mobile");
-            });
-            $('.site-mobile-shade').click(function (e) {
-                $('body').removeClass("site-mobile");
-            });
-            if (layui.sessionData('main').full) {
-                $(document).ready(function () {
-                    full();
-                });
-            }
-            $('#main-full').click(function (e) {
-                if ($('.layui-main').hasClass('main-full')) {
-                    t_full();
-                } else {
-                    full();
-                }
-            });
-            function t_full() {
-                $('.layui-main').removeClass("main-full");
-                $('.mier-main').removeClass("main-full");
-                $('#main-full').find('a').text('全屏');
-                layui.sessionData('main', {
-                    key: 'full'
-                    , value: false
-                });
-            }
-            function full() {
-                $('.layui-main').addClass("main-full");
-                $('.mier-main').addClass("main-full");
-                $('#main-full').find('a').text('退出全屏');
-                layui.sessionData('main', {
-                    key: 'full'
-                    , value: true
-                });
-            }
-            //显示当前tab
-            if (location.hash) {
-                element.tabChange('doc', location.hash.replace(/^#/, ''));
-            }
-            element.on('tab(doc)', function () {
-                var othis = $(this),
-                    layid = othis.attr('lay-id');
-                if (layid) {
-                    location.hash = layid;
-                }
-            });
-            form.on('select(tabVersion)', function (e) {
-                window.location.href = "/{$route_prefix}/document?name=explain&version=" + e.value
-            });
+<script src="{$assets}/layui/layui.js"></script>
+<script src="/{$route_prefix}/assets/json-viewer.min.js"></script>
+<script src="/{$route_prefix}/assets/clipboard.min.js"></script>
+<script>
+document.onreadystatechange = function() {
+    if (document.readyState == 'complete') {
+        document.body.style.display = 'block';
+    } else {
+        document.body.style.display = 'none';
+    };
+};
+layui.use(function() {
+    var element = layui.element,
+    $ = layui.jquery,
+    form = layui.form;
+    form.on('select(component)', function(item) {
+        window.location.href = item.value;
+    });
+    $('.site-tree-mobile').click(function(e) {
+        $('body').addClass('site-mobile');
+    });
+    $('.site-mobile-shade').click(function(e) {
+        $('body').removeClass('site-mobile');
+    });
+    if (layui.sessionData('main').full) {
+        $(document).ready(function() {
+            full();
         });
-    </script>
-    {block name='js'} {/block}
+    }
+    $('#main-full').click(function(e) {
+        if ($('.layui-main').hasClass('main-full')) {
+            t_full();
+        } else {
+            full();
+        }
+    });
+    function t_full() {
+        $('.layui-main').removeClass('main-full');
+        $('.mier-main').removeClass('main-full');
+        $('#main-full').find('a').text('全屏');
+        layui.sessionData('main', {
+            key: 'full',
+            value: false
+        });
+    }
+    function full() {
+        $('.layui-main').addClass('main-full');
+        $('.mier-main').addClass('main-full');
+        $('#main-full').find('a').text('退出全屏');
+        layui.sessionData('main', {
+            key: 'full',
+            value: true
+        });
+    }
+    //显示当前tab
+    if (location.hash) {
+        element.tabChange('doc', location.hash.replace(/^#/, ''));
+    }
+    element.on('tab(doc)', function() {
+        var othis = $(this),
+        layid = othis.attr('lay-id');
+        if (layid) {
+            location.hash = layid;
+        }
+    });
+    form.on('select(tabVersion)', function(e) {
+        window.location.href = '/{$route_prefix}/document?name=explain&version=' + e.value
+    });
+});
+</script>
+{block name='js'}{/block}
 </body>
-
 </html>
