@@ -80,7 +80,7 @@ class Parser
     private function comment2Array($comment = '')
     {
         // 多空格转换成单空格
-        $comment = preg_replace('/[ ]+/', ' ', $comment);
+        $comment = preg_replace('/[ ]+/', ' ', (string) $comment);
         preg_match_all('/\*[\s+]?@(.*?)[\n|\r]/is', $comment, $matches);
         $arr = [];
         foreach ($matches[1] as $key => $match) {
