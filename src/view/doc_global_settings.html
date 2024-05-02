@@ -1,0 +1,59 @@
+{extend name="base" /}
+{block name="head"}
+{/block}
+{block name="content"}
+<div class="layui-card">
+    <div class="layui-card-header" style="font-size: 16px">全局设置</div>
+    <div class="layui-card-body">
+        <form class="layui-form" lay-filter="demo-filter">
+            {volist name="data.list" id="v"}
+            <blockquote class="layui-elem-quote">{$key}</blockquote>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>参数值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volist name=":config('apidoc.header')" id='v1'}
+                    <tr>
+                        <td>{$key}</td>
+                        <td>
+                            <textarea name="{$key}" placeholder="请输入{$key}" autocomplete="off" class="layui-textarea">{$v1}</textarea>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+            {/volist}
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="button" lay-submit lay-filter="demo-val" class="layui-btn layui-btn-sm">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{/block}
+{block name='js'}
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.jquery;
+        var form = layui.form;
+        var header = localStorage.getItem('header');
+        form.val('demo-filter', JSON.parse(header));
+        form.on('submit(demo-val)', function (data) {
+            var field = data.field;
+            localStorage.setItem('header', JSON.stringify(field));
+            layer.msg('保存成功', { icon: 6, time: 1000 });
+            return false;
+        });
+    });
+</script>
+{/block}
