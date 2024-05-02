@@ -11,6 +11,7 @@ composer require hulang/think-api-doc
 ##### 2.配置参数
 
 - 安装好扩展后在 `config\apidoc.php` 配置文件
+- 需要指定`layui`目录
 
 ##### 3.书写规范
 
