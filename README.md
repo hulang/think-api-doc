@@ -17,7 +17,7 @@ composer require hulang/think-api-doc
 ```php
 <?php
 
-namespace app\doc\controller;
+namespace app\api\controller;
 
 /**
  * @title API接口
