@@ -16,63 +16,50 @@
 </head>
 
 <body style="display: none;">
-    <div class="layui-layout mier-apidoc-admin">
-        {block name="header"}
-        <div class="layui-header">
-            <div class="mier-main">
-                <div class="layui-logo">
-                    <img src="/{$route_prefix}/assets/logo.png" alt="{$web.title}">
-                </div>
-                <ul class="layui-layout-left layui-form component">
-                    <li class="layui-nav-item">
-                        <select lay-search="" lay-filter="component">
-                            <option value="">搜索接口或选择模块</option>
-                            {if(isset($document))}
-                            <option value="" disabled>序言</option>
-                            {volist name="document" id="v"}
-                            <option value="/{$route_prefix}/document?name={$key}" {input('name')==$key ? 'selected' : ''
-                                }>
-                                ├──{$v.name}</option>
-                            {/volist}
-                            {/if}
-                            {volist name='menu' id='v'}
-                            <option value="/{$route_prefix}/module?name={$v.class}" <?php echo
-                                (input('name')==$v['class']) ? 'selected' : '' ; ?>>{$v.title}</option>
-                            {if(isset($v.action))}
-                            {volist name='v.action' id='m'}
-                            <option value="/{$route_prefix}/action?name={$m.href}" <?php echo
-                                (input('name')==$m['href']) ? 'selected' : '' ; ?>>├──{$m.title}</option>
-                            {/volist}
-                            {/if}
-                            {/volist}
-                        </select>
-                    </li>
-                </ul>
-                <ul class="layui-nav layui-layout-right">
-                    <li class="layui-nav-item" id="main-full"><a href="javascript:;">全屏</a></li>
-                    <li class="layui-nav-item"><a href="/{$route_prefix}">文档</a></li>
-                    <li class="layui-nav-item"><a href="/{$route_prefix}/outlogin">退出</a></li>
-                </ul>
-            </div>
-        </div>
-        {/block}
-        {block name="main"}
-        <div class="layui-main site-inline">
-            <div class="mier-site-tree">
-                {include file="left" /}
-            </div>
-            <div class="site-content">
-                {block name="content"}{/block}
-            </div>
-        </div>
-        {/block}
-        <div class="site-tree-mobile layui-hide">
-            <i class="layui-icon layui-icon-right"></i>
-        </div>
-        <div class="site-mobile-shade"></div>
-        {block name="footer"}
-        {/block}
+<div class="layui-layout mier-apidoc-admin">
+  {block name="header"}
+  <div class="layui-header">
+    <div class="mier-main">
+      <div class="layui-logo"><img src="/{$route_prefix}/assets/logo.png" alt="{$web.title}"></div>
+      <ul class="layui-layout-left layui-form component">
+        <li class="layui-nav-item">
+          <select lay-search="" lay-filter="component">
+            <option value="">搜索接口或选择模块</option>
+            {if(isset($document))}
+            <option value="" disabled>序言</option>
+            {volist name="document" id="v"}
+            <option value="/{$route_prefix}/document?name={$key}"{:input('name')==$key ? ' selected="selected"' : ''}>├──{$v.name}</option>
+            {/volist}
+            {/if}
+            {volist name='menu' id='v'}
+            <option value="/{$route_prefix}/module?name={$v.class}"{:input('name')==$v['class'] ? ' selected="selected"' : ''}>{$v.title}</option>
+            {if(isset($v.action))}
+            {volist name='v.action' id='m'}
+            <option value="/{$route_prefix}/action?name={$m.href}"{:input('name')==$m['href'] ? ' selected="selected"' : ''}>├──{$m.title}</option>
+            {/volist}
+            {/if}
+            {/volist}
+          </select>
+        </li>
+      </ul>
+      <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item" id="main-full"><a href="javascript:;">全屏</a></li>
+        <li class="layui-nav-item"><a href="/{$route_prefix}">文档</a></li>
+        <li class="layui-nav-item"><a href="/{$route_prefix}/outlogin">退出</a></li>
+      </ul>
     </div>
+  </div>
+  {/block}
+  {block name="main"}
+  <div class="layui-main site-inline">
+    <div class="mier-site-tree">{include file="left" /}</div>
+    <div class="site-content">{block name="content"}{/block}</div>
+  </div>
+  {/block}
+  <div class="site-tree-mobile layui-hide"><i class="layui-icon layui-icon-right"></i></div>
+  <div class="site-mobile-shade"></div>
+  {block name="footer"}{/block}
+ </div>
 <script src="{$assets}/layui/layui.js"></script>
 <script src="/{$route_prefix}/assets/json-viewer.min.js"></script>
 <script src="/{$route_prefix}/assets/clipboard.min.js"></script>
