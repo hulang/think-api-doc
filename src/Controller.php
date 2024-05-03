@@ -9,17 +9,28 @@ use think\facade\View;
 
 class Controller
 {
-
     protected $assets_path = '';
     protected $view_path = '';
     protected $doc;
     protected $route_prefix = '';
     protected $root = '';
-
-    protected $request; # Request 实例
-    protected $view; # 视图类实例
-
-    # 资源类型
+    /**
+     * Request 实例
+     *
+     * @return mixed|array
+     */
+    protected $request;
+    /**
+     * 视图类实例
+     *
+     * @return mixed|array
+     */
+    protected $view;
+    /**
+     * 资源类型
+     *
+     * @return mixed|array
+     */
     protected $mimeType = [
         'xml' => 'application/xml,text/xml,application/x-xml',
         'json' => 'application/json,text/x-json,application/jsonrequest,text/json',
