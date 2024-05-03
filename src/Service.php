@@ -21,8 +21,8 @@ class Service extends \think\Service
                 Route::get('module', "\\hulang\\apidoc\\Controller@module");
                 Route::get('action', "\\hulang\\apidoc\\Controller@action");
                 Route::get('document', "\\hulang\\apidoc\\Controller@document");
-                Route::any('login$', "\\hulang\\apidoc\\Controller@login");
-                Route::any('outlogin$', "\\hulang\\apidoc\\Controller@outlogin");
+                Route::any('login', "\\hulang\\apidoc\\Controller@login");
+                Route::any('outlogin', "\\hulang\\apidoc\\Controller@outlogin");
                 Route::any('format_params', "\\hulang\\apidoc\\Controller@format_params");
             });
         });

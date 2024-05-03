@@ -9,7 +9,8 @@ use think\facade\View;
 
 class Controller
 {
-    protected $assets_path = '';
+    protected $static_path = '';
+    protected $static_assets = '';
     protected $view_path = '';
     protected $doc;
     protected $route_prefix = '';
@@ -50,7 +51,7 @@ class Controller
     public function __construct()
     {
         // 有些程序配置了默认json问题
-        $this->assets_path = __DIR__ . '/assets/';
+        $this->static_path = __DIR__ . '/assets/';
         $this->doc = new Doc(config('apidoc'));
         $this->route_prefix = $this->doc->route_prefix;
 
@@ -58,9 +59,12 @@ class Controller
 
         View::assign('web', $this->doc->__get());
         View::assign('route_prefix', $this->route_prefix);
-        // 静态文件
-        $this->assets_path = $this->doc->__get('static_path') ?: '/static/' . $this->route_prefix;
-        View::assign('assets', $this->assets_path);
+        // 静态[layui]文件
+        $this->static_path = $this->doc->__get('static_path') ?: '/static/' . $this->route_prefix;
+        View::assign('static_path', $this->static_path);
+        // 静态[layui]文件
+        $this->static_assets = $this->doc->__get('static_assets') ?: '/' . $this->route_prefix;
+        View::assign('static_assets', $this->static_assets);
         // root目录获取
         $this->root = request()->root() ?: request()->domain();
         if (

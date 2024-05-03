@@ -33,6 +33,7 @@ class Doc
         // 过滤、不解析的方法名称
         'filter_method' => [],
         'static_path' => '/static/plug',
+        'static_assets' => '',
         'return_format' => [
             'status' => '200/300/301/302',
             'message' => '提示信息',

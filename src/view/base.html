@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="{$assets}/layui/css/layui.css">
-    <link rel="stylesheet" href="/{$route_prefix}/assets/json-viewer.min.css">
-    <link rel="stylesheet" href="/{$route_prefix}/assets/style.min.css">
+    <link rel="stylesheet" href="{$static_path}/layui/css/layui.css">
+    <link rel="stylesheet" href="{$static_assets}/assets/json-viewer.min.css">
+    <link rel="stylesheet" href="{$static_assets}/assets/style.min.css">
     {block name="head"}
     {/block}
 </head>
@@ -20,7 +20,7 @@
   {block name="header"}
   <div class="layui-header">
     <div class="mier-main">
-      <div class="layui-logo"><img src="/{$route_prefix}/assets/logo.png" alt="{$web.title}"></div>
+      <div class="layui-logo"><img src="{$static_assets}/assets/logo.png" alt="{$web.title}"></div>
       <ul class="layui-layout-left layui-form component">
         <li class="layui-nav-item">
           <select lay-search="" lay-filter="component">
@@ -59,10 +59,9 @@
   <div class="site-tree-mobile layui-hide"><i class="layui-icon layui-icon-right"></i></div>
   <div class="site-mobile-shade"></div>
   {block name="footer"}{/block}
- </div>
-<script src="{$assets}/layui/layui.js"></script>
-<script src="/{$route_prefix}/assets/json-viewer.min.js"></script>
-<script src="/{$route_prefix}/assets/clipboard.min.js"></script>
+</div>
+<script src="{$static_path}/layui/layui.js"></script>
+<script src="{$static_assets}/assets/json-viewer.min.js"></script>
 <script>
 document.onreadystatechange = function() {
     if (document.readyState == 'complete') {

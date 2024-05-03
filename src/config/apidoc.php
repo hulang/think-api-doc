@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'API-DOC', # 文档title
     'version' => '1.0.0', # 文档版本
