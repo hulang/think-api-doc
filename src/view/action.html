@@ -160,14 +160,14 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">请求头部
                 <span style="float: right;z-index: 999;position: relative;">
-                    <button class="layui-btn layui-btn-xs" data-type="add" data-field="header" type="button">添加一行</button>
+                    <button type="button" class="layui-btn layui-btn-xs" lay-on="insert" data-type="header">添加一行</button>
                 </span>
                 <span style="float: right;z-index: 999;position: relative;margin-right: 20px;">
-                    <button class="layui-btn layui-btn-xs" data-type="zk" data-field="header" type="button">展开</button>
+                    <button type="button" class="layui-btn layui-btn-xs" lay-on="headerShow">展开</button>
                 </span>
             </label>
-            <div class="layui-input-block" id="zk_info" style="display: none;">
-                <table class="layui-table">
+            <div class="layui-input-block" id="zk_info" style="display:none;">
+                <table class="layui-table header_table">
                     <colgroup>
                         <col width="200">
                         <col>
@@ -182,11 +182,11 @@
                     <tbody>
                         {{# if(d.is_header == 1){ }} {{# layui.each(d._header,function(index,item){ }}
                         <tr>
-                            <td><input name="header[name][]" type="text" disabled class="layui-input" value="{{ index }}">
+                            <td><input type="text" name="header[name][]" disabled class="layui-input" value="{{ index }}">
                             </td>
-                            <td><input name="header[value][]" type="text" class="layui-input" value="{{ item }}"></td>
+                            <td><input type="text" name="header[value][]" class="layui-input" autocomplete="off" value="{{ item }}"></td>
                             <th>
-                                <button class="layui-btn layui-btn-danger layui-btn-xs" type="button" data-type="del">删除
+                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除
                             </button>
                             </th>
                         </tr>
@@ -198,11 +198,11 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">请求参数
                 <span style="float: right;z-index: 999;position: relative;">
-                    <button class="layui-btn layui-btn-xs" type="button" data-type="add" data-field="params">添加一行</button>
+                    <button type="button" class="layui-btn layui-btn-xs" lay-on="insert" data-type="params">添加一行</button>
                 </span>
             </label>
             <div class="layui-input-block">
-                <table class="layui-table">
+                <table class="layui-table params_table">
                     <colgroup>
                         <col width="200">
                         <col>
@@ -217,21 +217,19 @@
                     <tbody>
                         {{# if(d.is_params == 1){ }} {{# layui.each(d._params,function(index,item){ }}
                         <tr>
-                            <td><input name="params[name][]" type="text" disabled class="layui-input" value="{{ index }}">
+                            <td><input type="text" name="params[name][]" disabled class="layui-input" autocomplete="off" value="{{ index }}">
                             </td>
-                            <td><input name="params[value][]" type="text" class="layui-input" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
+                            <td><input type="text" name="params[value][]" class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
                             <th>
-                                <button class="layui-btn layui-btn-danger layui-btn-xs" type="button" data-type="del">删除
-                            </button>
+                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除</button>
                             </th>
                         </tr>
                         {{# }); }} {{# }; }} {{# if(d.param){ }} {{# layui.each(d.param,function(index,item){ }}
                         <tr>
-                            <td><input name="params[name][]" type="text" class="layui-input" value="{{ item['name'] }}"></td>
-                            <td><input name="params[value][]" type="text"  {{ item.valid  == 'YES' ? 'required  lay-verify="required"' : '' }} class="layui-input" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
+                            <td><input type="text" name="params[name][]" class="layui-input" autocomplete="off" value="{{ item['name'] }}"></td>
+                            <td><input type="text" name="params[value][]"{{ item.valid  == 'YES' ? ' required  lay-verify="required"' : '' }} class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
                             <td>
-                                <button class="layui-btn layui-btn-danger layui-btn-xs" type="button" data-type="del">删除
-                            </button>
+                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除</button>
                             </td>
                         </tr>
                         {{# }); }} {{# } }}
@@ -282,11 +280,36 @@ layui.use(function() {
     }
     // on
     util.on({
-        copy: function () {
+        // 
+        insert: function() {
+            var field = $(this).data('type');
+            var html = '';
+            html += '<tr>';
+            html += '<td><input type="text" name="' + field + '[name][]" class="layui-input" autocomplete="off" value=""></td>';
+            html += '<td><input type="text" name="' + field + '[value][]" class="layui-input" autocomplete="off" value=""></td>';
+            html += '<td>';
+            html += '<button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除</button>';
+            html += '</td>';
+            html += '</tr>';
+            $('.' + field + '_table>tbody').append(html);
+        },
+        headerShow: function() {
+            if ($('#zk_info').css('display') == 'none') {
+                $('#zk_info').css('display', 'block');
+                $(this).text('收缩');
+            } else {
+                $('#zk_info').css('display', 'none');
+                $(this).text('展开');
+            }
+        },
+        del: function() {
+            $(this).parents('tr').remove();
+        },
+        copy: function() {
             var value = $(this).data('value');
             lay.clipboard.writeText({
                 text: value,
-                done: function () {
+                done: function() {
                     layer.msg('复制成功', {
                         icon: 1,
                         time: 2000,
@@ -294,55 +317,13 @@ layui.use(function() {
                         scrollbar: false
                     });
                 },
-                error: function () {
-                    layer.msg('复制失败', { icon: 2 });
+                error: function() {
+                    layer.msg('复制失败', {
+                        icon: 2
+                    });
                 }
             });
         }
-    });
-    $('body').on('click', '.copy-btn', function() {
-        let val = $(this).prev().text();
-        let input = '<input type="hidden" data-clipboard-text="' + val + '">';
-        let $input = $(input);
-        var clipboard = new Clipboard($input[0]);
-        clipboard.on('success', function(e) {
-            layer.msg('已复制', {
-                'icon': 6,
-                time: 1000
-            });
-        });
-        $input.trigger('click');
-    });
-    var action = {
-        add: function() {
-            var field = this.data('field');
-            var html = '';
-            html += '<tr>';
-            html += '<td><input name="' + field + '[name][]" type="text" class="layui-input" value=""></td>';
-            html += '<td><input name="' + field + '[value][]" type="text" class="layui-input" value=""></td>';
-            html += '<td>';
-            html += '<button type="button" class="layui-btn layui-btn-danger layui-btn-xs" data-type="del">删除</button>';
-            html += '</td>';
-            html += '</tr>';
-            this.parents('.layui-form-item').find('.layui-input-block').find(html);
-        },
-        del: function() {
-            this.parents('tr').remove();
-        },
-        zk: function() {
-            if ($('#zk_info').css('display') == 'none') {
-                $('#zk_info').css("display", 'block');
-                $(this).text('收缩');
-            } else {
-                $('#zk_info').css("display", 'none');
-                $(this).text('展开');
-            }
-        }
-    }
-
-    $('body').delegate('button', 'click', function() {
-        var type = $(this).data('type');
-        action[type] && action[type].call($(this));
     });
 
     // 格式化对象输出
@@ -484,9 +465,9 @@ layui.use(function() {
             alert('data is null');
             return;
         }
-        if (!filename){
+        if (!filename) {
             filename = 'json.json';
-        } 
+        }
         if (typeof data === 'object') {
             data = JSON.stringify(data, undefined, 4)
         }
