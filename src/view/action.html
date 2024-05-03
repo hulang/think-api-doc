@@ -4,30 +4,28 @@
 {block name="content"}
 <div class="layui-card" id="view_tpl1"></div>
 <div class="layui-card">
-    <div class="layui-tab layui-tab-brief" lay-filter="doc">
-        <ul class="layui-tab-title">
-            <li class="layui-this" lay-id="detail">接口详情</li>
-            <li lay-id="debug">在线调试</li>
-        </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <div id="view_tpl2" class="overflow"></div>
-            </div>
-            <div class="layui-tab-item">
-                <div id="view_tpl3" class="overflow"></div>
-            </div>
-        </div>
+  <div class="layui-tab layui-tab-brief" lay-filter="doc">
+    <ul class="layui-tab-title">
+      <li class="layui-this" lay-id="detail">接口详情</li>
+      <li lay-id="debug">在线调试</li>
+    </ul>
+    <div class="layui-tab-content">
+      <div class="layui-tab-item layui-show">
+        <div id="view_tpl2" class="overflow"></div>
+      </div>
+      <div class="layui-tab-item">
+        <div id="view_tpl3" class="overflow"></div>
+      </div>
     </div>
+  </div>
 </div>
 <script type="text/html" id="tpl1">
-    <div class="layui-card-header" style="font-size: 16px">
-        <blockquote class="layui-elem-quote">{{ d.title }}</blockquote>
-    </div>
-    <div style="background-color: #F2F2F2;margin-top:20px">
-        <div class="layui-card-body">
-            接口描述：{{ d.desc}}
-        </div>
-    </div>
+<div class="layui-card-header" style="font-size: 16px">
+  <blockquote class="layui-elem-quote">{{ d.title }}</blockquote>
+</div>
+<div style="background-color: #F2F2F2;margin-top:20px">
+  <div class="layui-card-body">接口描述：{{ d.desc}} </div>
+</div>
 </script>
 <script type="text/html" id="tpl2">
     <table class="layui-table">
