@@ -29,7 +29,7 @@
                             <option value="">搜索接口或选择模块</option>
                             {if(isset($document))}
                             <option value="" disabled>序言</option>
-                            {volist name="document" id='v'}
+                            {volist name="document" id="v"}
                             <option value="/{$route_prefix}/document?name={$key}" {input('name')==$key ? 'selected' : ''
                                 }>
                                 ├──{$v.name}</option>
@@ -143,6 +143,6 @@ layui.use(function() {
     });
 });
 </script>
-{block name='js'}{/block}
+{block name="js"}{/block}
 </body>
 </html>

@@ -1,7 +1,7 @@
 {extend name="base" /}
 {block name="head"}
 {/block}
-{block name='content'}
+{block name="content"}
 <div class="layui-card" id="view_tpl1"></div>
 <div class="layui-card">
     <div class="layui-tab layui-tab-brief" lay-filter="doc">
@@ -269,7 +269,7 @@
 </div>
 
 {/block}
-{block name='js'}
+{block name="js"}
 <script>
     function trim(str) {
         return str.replace(/(^\s*)|(\s*$)/g, "").replace(/&nbsp;/ig, "").replace(/null/ig, "");
