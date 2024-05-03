@@ -78,7 +78,6 @@ return [
     ],
     // API分类
     'api_type' => [
-
         [
             'name' => 'Api接口', //分类标题
             'app' => 'api', //对应应用
@@ -112,6 +111,7 @@ return [
         '__debuginfo',
     ],
     'static_path' => '/static/plug',
+    'static_assets' => '/static/doc',
     'return_format' => [
         'status' => '200/300/301/302',
         'message' => '提示信息',
