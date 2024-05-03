@@ -80,7 +80,7 @@ h1,h2,h3 {
 	font-size:12px;
 	color:#bbb;
 	font-style:normal;
-    margin-right:10px;
+	margin-right:10px;
 }
 .site-tree .layui-tree li h2 {
 	line-height:36px;
