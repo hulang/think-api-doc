@@ -36,11 +36,11 @@
         <tbody>
             <tr>
                 <td>接口地址</td>
-                <td><span>{{ d.url }}</span> <i class="copy-btn layui-icon layui-icon-form"></i></td>
+                <td><span>{{ d.url }}</span> <i class="layui-icon layui-icon-form copy-btn" lay-on="copy" data-value="{{ d.url }}"></i></td>
             </tr>
             <tr>
                 <td>后台方法</td>
-                <td><span>{{ d.href }}</span> <i class="copy-btn layui-icon layui-icon-form"></i></td>
+                <td><span>{{ d.href }}</span> <i class="layui-icon layui-icon-form copy-btn" lay-on="copy" data-value="{{ d.href }}"></i></td>
             </tr>
             <tr>
                 <td>请求方式</td>
@@ -264,6 +264,7 @@ layui.use(function() {
     var form = layui.form;
     var layer = layui.layer;
     var $ = layui.jquery;
+    var util = layui.util;
     $.get(window.location.href, function(response) {
         if (response.code == 200) {
             render(tpl1.innerHTML, 'view_tpl1', response.data);
@@ -279,6 +280,26 @@ layui.use(function() {
         });
         form.render();
     }
+    // on
+    util.on({
+        copy: function () {
+            var value = $(this).data('value');
+            lay.clipboard.writeText({
+                text: value,
+                done: function () {
+                    layer.msg('复制成功', {
+                        icon: 1,
+                        time: 2000,
+                        shade: [0.3, '#393D49'],
+                        scrollbar: false
+                    });
+                },
+                error: function () {
+                    layer.msg('复制失败', { icon: 2 });
+                }
+            });
+        }
+    });
     $('body').on('click', '.copy-btn', function() {
         let val = $(this).prev().text();
         let input = '<input type="hidden" data-clipboard-text="' + val + '">';
@@ -422,7 +443,7 @@ layui.use(function() {
                                 maxmin: true,
                                 content: html,
                                 success: function(obj) {
-                                    let $this = obj.children('div.layui-layer-content').children('pre');
+                                    var $this = obj.children('div.layui-layer-content').children('pre');
                                     if (!apidoc_isJson(htmlJson)) {
                                         $this.html(htmlJson);
                                     } else {
@@ -440,13 +461,13 @@ layui.use(function() {
         return false;
     });
     form.on('switch(filter)', function(obj) {
-        var data = form.val("formTest");
+        var data = form.val('formTest');
         var arr = {
             collapsed: data.collapsed ? false: true,
             withQuotes: data.withQuotes ? false: true,
             withLinks: false
         };
-        let $this = $(this).parents('.layui-form').siblings('pre');
+        var $this = $(this).parents('.layui-form').siblings('pre');
         $this.jsonViewer(writeHtml(htmlJson), arr);
         $(window).resize();
         form.render();
@@ -454,7 +475,7 @@ layui.use(function() {
     $('body').on('click', '#saves', function() {
         saveJSON();
     });
-    //json文件保存到本地
+    // json文件保存到本地
     function saveJSON() {
         var data = htmlJson;
         var d = new Date();
@@ -463,7 +484,9 @@ layui.use(function() {
             alert('data is null');
             return;
         }
-        if (!filename) filename = 'json.json'
+        if (!filename){
+            filename = 'json.json';
+        } 
         if (typeof data === 'object') {
             data = JSON.stringify(data, undefined, 4)
         }
