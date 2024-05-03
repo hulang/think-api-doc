@@ -38,22 +38,19 @@ class Controller
     ];
     public function __construct()
     {
-        //有些程序配置了默认json问题
+        // 有些程序配置了默认json问题
         $this->assets_path = __DIR__ . '/assets/';
         $this->doc = new Doc(config('apidoc'));
         $this->route_prefix = $this->doc->route_prefix;
-        $config = [
-            'view_path' => __DIR__ . '/view/',
-            'default_filter' => '',
-        ];
 
         View::config(['view_path' => __DIR__ . '/view/', 'view_suffix' => 'html']);
 
         View::assign('web', $this->doc->__get());
         View::assign('route_prefix', $this->route_prefix);
-
+        // 静态文件
         $this->assets_path = $this->doc->__get('static_path') ?: '/static/' . $this->route_prefix;
         View::assign('assets', $this->assets_path);
+        // root目录获取
         $this->root = request()->root() ?: request()->domain();
         if (
             request()->session($this->route_prefix . '.is_login') !== $this->doc->__get('password')
