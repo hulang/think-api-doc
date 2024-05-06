@@ -65,7 +65,7 @@ class Controller
         // 静态[assets]文件
         $this->static_assets = $this->doc->__get('static_assets') ?: '/' . $this->route_prefix;
         View::assign('static_assets', $this->static_assets);
-        // root目录获取
+        // [root]目录获取
         $this->root = request()->root() ?: request()->domain();
         // 登陆判断
         if (
@@ -196,7 +196,6 @@ class Controller
      *
      * @return mixed|array|bool
      */
-    // debug 格式化参数
     public function format_params()
     {
         $header = $this->format(request()->param('header'));
