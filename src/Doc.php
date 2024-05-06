@@ -64,7 +64,7 @@ class Doc
      *
      * @access public
      *
-     * @param  array $config 配置参数
+     * @param array $config 配置参数
      */
     public function __construct($config = [])
     {
@@ -76,9 +76,9 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name 配置名称
+     * @param string $name 配置名称
      *
-     * @return mixed    配置值
+     * @return mixed 配置值
      */
     public function __get($name = null)
     {
@@ -94,8 +94,8 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name  配置名称
-     * @param  string $value 配置值
+     * @param string $name  配置名称
+     * @param string $value 配置值
      *
      * @return void
      */
@@ -111,16 +111,22 @@ class Doc
      *
      * @access public
      *
-     * @param  string $name 配置名称
+     * @param string $name 配置名称
      *
-     * @return bool
+     * @return mixed|bool
      */
     public function __isset($name)
     {
         return isset($this->config[$name]);
     }
 
-    # 获取接口列表
+    /**
+     * 获取接口列表
+     * @param int $version 版本号
+     * @param string $action
+     *
+     * @return mixed|array|bool
+     */
     public function get_api_list($version = 0)
     {
         $list = [];
@@ -132,7 +138,6 @@ class Doc
         foreach ($file as $k => $class) {
             $class = "app\\" . $class;
             if (class_exists($class)) {
-
                 $reflection = new \ReflectionClass($class);
                 $doc_str = $reflection->getDocComment();
                 $doc = new Parser();
@@ -163,7 +168,7 @@ class Doc
      * @param string $class
      * @param string $action
      *
-     * @return array|bool
+     * @return mixed|array|bool
      */
     public function get_api_detail($class = '', $action = '')
     {
@@ -177,7 +182,7 @@ class Doc
      * @param string $class
      * @param string $action
      *
-     * @return array|bool
+     * @return mixed|array|bool
      */
     protected function listDirFiles($app, $isapp = true)
     {
@@ -188,23 +193,31 @@ class Doc
         } else {
             $dir = $app;
         }
-
-        if (is_dir($dir)) { //如果是目录，则进行下一步操作
-            $d = opendir($dir); //打开目录
-            if ($d) { //目录打开正常
-                while (($file = readdir($d)) !== false) { //循环读出目录下的文件，直到读不到为止
-                    if ($file != '.' && $file != '..') { //排除一个点和两个点
-                        if (is_dir($dir . '/' . $file)) { //如果当前是目录
-                            $arr = array_merge($arr, self::listDirFiles($dir . '/' . $file, false)); //进一步获取该目录里的文件
+        // 如果是目录，则进行下一步操作
+        if (is_dir($dir)) {
+            // 打开目录
+            $d = opendir($dir);
+            // 目录打开正常
+            if ($d) {
+                // 循环读出目录下的文件，直到读不到为止
+                while (($file = readdir($d)) !== false) {
+                    // 排除一个点和两个点
+                    if ($file != '.' && $file != '..') {
+                        // 如果当前是目录
+                        if (is_dir($dir . '/' . $file)) {
+                            // 进一步获取该目录里的文件
+                            $arr = array_merge($arr, self::listDirFiles($dir . '/' . $file, false));
                         } else {
                             if (pathinfo($dir . '/' . $file)['extension'] == 'php') {
-                                $arr[] = str_replace([$base, '/', '.php'], ['', '\\', ''], $dir . '/' . $file); //进一步获取该目录里的文件
+                                // 进一步获取该目录里的文件
+                                $arr[] = str_replace([$base, '/', '.php'], ['', '\\', ''], $dir . '/' . $file);
                             }
                         }
                     }
                 }
             }
-            closedir($d); //关闭句柄
+            // 关闭句柄
+            closedir($d);
         }
         asort($arr);
         return $arr;
