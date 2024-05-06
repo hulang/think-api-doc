@@ -67,4 +67,6 @@ class Index
 
 ##### 4.访问方法
 
-- `http://你的域名/apidoc` 或者 `http://你的域名/index.php/apidoc`
+- `http://你的域名/apidoc`
+- 或者
+- `http://你的域名/index.php/apidoc`
