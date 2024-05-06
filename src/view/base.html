@@ -71,9 +71,9 @@ document.onreadystatechange = function() {
     };
 };
 layui.use(function() {
-    var element = layui.element,
-    $ = layui.jquery,
-    form = layui.form;
+    var element = layui.element;
+    var $ = layui.jquery;
+    var form = layui.form;
     form.on('select(component)', function(item) {
         window.location.href = item.value;
     });
@@ -113,7 +113,7 @@ layui.use(function() {
             value: true
         });
     }
-    //显示当前tab
+    // 显示当前tab
     if (location.hash) {
         element.tabChange('doc', location.hash.replace(/^#/, ''));
     }
