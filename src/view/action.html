@@ -73,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{# layui.each(d.param,function(k,v){ }}
+                            {{# layui.each(d.param,function(k, v){ }}
                             <tr>
                                 <td>{{ v.name }}</td>
                                 <td>{{ v.type }}</td>
@@ -86,7 +86,8 @@
                     </table>
                 </td>
             </tr>
-            {{# } }} {{# if(d.return){ }}
+            {{# } }}
+            {{# if(d.return){ }}
             <tr>
                 <td>响应参数</td>
                 <td>
@@ -104,7 +105,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{# layui.each(d.return,function(k,v){ }}
+                            {{# layui.each(d.return,function(k, v){ }}
                             <tr>
                                 <td>{{ v.name }}</td>
                                 <td>{{ v.type }}</td>
@@ -138,7 +139,7 @@
                     {{# if(d.method == 'api'){ }}
                         <option value="API" selected="selected">API</option>
                     {{# }else{ }}
-                        {{# layui.each(['GET','POST','PUT','DELETE'],function(index,item){ }}
+                        {{# layui.each(['GET','POST','PUT','DELETE'],function(index, item){ }}
                         <option value="{{ item }}"{{# if(item.trim()== d.method.trim()){ }} selected="selected"{{# } }}>{{ item }}</option>
                         {{# }); }}
                     {{# } }}
@@ -147,7 +148,7 @@
             <label class="layui-form-label">请求类型</label>
             <div class="layui-input-inline">
                 <select name="requestType" lay-verify="required">
-                    {{# layui.each(['JSON','HTML','XML','SCRIPT','JSONP','TEXT'],function(index,item){ }}
+                    {{# layui.each(['JSON','HTML','XML','SCRIPT','JSONP','TEXT'],function(index, item){ }}
                     <option value="{{ item }}"{{# if(item.trim()== 'JSON'){ }} selected="selected"{{# } }}>{{ item }}</option>
                     {{# }); }}
                 </select>
@@ -167,6 +168,7 @@
                     <colgroup>
                         <col width="200">
                         <col>
+                        <col width="80">
                     </colgroup>
                     <thead>
                         <tr>
@@ -176,15 +178,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{# if(d.is_header == 1){ }} {{# layui.each(d._header,function(index,item){ }}
+                        {{# if(d.is_header == 1){ }} {{# layui.each(d._header,function(index, item){ }}
                         <tr>
                             <td><input type="text" name="header[name][]" disabled class="layui-input" value="{{ index }}">
                             </td>
                             <td><input type="text" name="header[value][]" class="layui-input" autocomplete="off" value="{{ item }}"></td>
-                            <th>
-                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除
-                            </button>
-                            </th>
+                            <th><button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-on="del">删除</button></th>
                         </tr>
                         {{# }); }} {{# }; }}
                     </tbody>
@@ -202,6 +201,7 @@
                     <colgroup>
                         <col width="200">
                         <col>
+                        <col width="80">
                     </colgroup>
                     <thead>
                         <tr>
@@ -211,24 +211,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{# if(d.is_params == 1){ }} {{# layui.each(d._params,function(index,item){ }}
+                        {{# if(d.is_params == 1){ }}
+                        {{# layui.each(d._params,function(index, item){ }}
                         <tr>
                             <td><input type="text" name="params[name][]" disabled class="layui-input" autocomplete="off" value="{{ index }}">
                             </td>
                             <td><input type="text" name="params[value][]" class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
-                            <th>
-                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除</button>
-                            </th>
+                            <th><button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-on="del">删除</button></th>
                         </tr>
-                        {{# }); }} {{# }; }} {{# if(d.param){ }} {{# layui.each(d.param,function(index,item){ }}
+                        {{# }); }}
+                        {{# }; }}
+                        {{# if(d.param){ }}
+                        {{# layui.each(d.param,function(index, item){ }}
                         <tr>
                             <td><input type="text" name="params[name][]" class="layui-input" autocomplete="off" value="{{ item['name'] }}"></td>
                             <td><input type="text" name="params[value][]"{{ item.valid  == 'YES' ? ' required  lay-verify="required"' : '' }} class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
-                            <td>
-                                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-on="del">删除</button>
-                            </td>
+                            <td><button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-on="del">删除</button></td>
                         </tr>
-                        {{# }); }} {{# } }}
+                        {{# }); }}
+                        {{# } }}
                     </tbody>
                 </table>
             </div>
