@@ -12,6 +12,7 @@ composer require hulang/think-api-doc
 
 - 安装好扩展后在 `config\apidoc.php` 配置文件
 - 需要指定`layui`目录
+- 如路由`css`和`图片`未生效,请复制`assets`文件夹到你的静态(static)路径中,再配置文件`config\apidoc.php`配置`static_assets`参数进行指定目录
 
 ##### 3.书写规范
 
