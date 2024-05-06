@@ -126,8 +126,9 @@
             <label class="layui-form-label">接口地址</label>
             <div class="layui-input-block">
                 {{# if(d.method == 'api'){ }}
-                <input type="url" name="url" required readonly="readonly" autocomplete="off" class="layui-input" value="{{ d.href ? d.href : ''}}"> {{# }else{ }}
-                <input type="url" name="url" required lay-verify="url" placeholder="请输入接口地址" autocomplete="off" class="layui-input" value="{{ d.url ? d.url : ''}}"> {{# } }}
+                <input type="text" name="url" required readonly="readonly" autocomplete="off" class="layui-input" value="{{ d.href ? d.href : ''}}"> {{# }else{ }}
+                <input type="text" name="url" required lay-verify="url" placeholder="请输入接口地址" autocomplete="off" class="layui-input" value="{{ d.url ? d.url : ''}}">
+                {{# } }}
             </div>
         </div>
         <div class="layui-form-item">
@@ -135,12 +136,10 @@
             <div class="layui-input-inline">
                 <select name="method" lay-verify="required">
                     {{# if(d.method == 'api'){ }}
-                        <option value="API" selected}}>API</option>
+                        <option value="API" selected="selected">API</option>
                     {{# }else{ }}
                         {{# layui.each(['GET','POST','PUT','DELETE'],function(index,item){ }}
-                        <option value="{{ item }}"
-                                {{# if(item.trim()== d.method.trim()){ }}selected{{# } }}>{{ item }}
-                        </option>
+                        <option value="{{ item }}"{{# if(item.trim()== d.method.trim()){ }} selected="selected"{{# } }}>{{ item }}</option>
                         {{# }); }}
                     {{# } }}
                 </select>
@@ -149,14 +148,11 @@
             <div class="layui-input-inline">
                 <select name="requestType" lay-verify="required">
                     {{# layui.each(['JSON','HTML','XML','SCRIPT','JSONP','TEXT'],function(index,item){ }}
-                    <option value="{{ item }}"
-                            {{# if(item.trim()== 'JSON'){ }}selected{{# } }}>{{ item }}
-                    </option>
+                    <option value="{{ item }}"{{# if(item.trim()== 'JSON'){ }} selected="selected"{{# } }}>{{ item }}</option>
                     {{# }); }}
                 </select>
             </div>
         </div>
-        
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">请求头部
                 <span style="float: right;z-index: 999;position: relative;">
