@@ -62,18 +62,19 @@ class Controller
         // 静态[layui]文件
         $this->static_path = $this->doc->__get('static_path') ?: '/static/' . $this->route_prefix;
         View::assign('static_path', $this->static_path);
-        // 静态[layui]文件
+        // 静态[assets]文件
         $this->static_assets = $this->doc->__get('static_assets') ?: '/' . $this->route_prefix;
         View::assign('static_assets', $this->static_assets);
         // root目录获取
         $this->root = request()->root() ?: request()->domain();
+        // 登陆判断
         if (
-            request()->session($this->route_prefix . '.is_login') !== $this->doc->__get('password')
+            cache($this->route_prefix . '.is_login') !== $this->doc->__get('password')
             && $this->doc->__get('password')
             && request()->url() !== '/' . $this->route_prefix . '/login'
             && stristr(request()->url(), '/assets') == false
         ) {
-            session($this->route_prefix . '.request_url', Request::url(true));
+            cache($this->route_prefix . '.request_url', Request::url(true));
             header('location:/' . $this->route_prefix . '/login');
             exit();
         }
@@ -121,7 +122,7 @@ class Controller
      *
      * @return mixed|array|bool
      */
-    protected function template($name, $vars = [], $config = [])
+    protected function template($name, $vars = [])
     {
         $vars = array_merge(['root' => $this->root], $vars);
         return View($name);
@@ -147,7 +148,7 @@ class Controller
             $reflection = new \ReflectionClass($name);
             $doc_str = $reflection->getDocComment();
             $doc = new Parser();
-            # 解析类
+            // 解析类
             $class_doc = $doc->parse_class($doc_str);
             View::assign('data', $class_doc);
         }
@@ -165,9 +166,9 @@ class Controller
             list($class, $action) = explode('::', $name);
             $data = $this->doc->get_api_detail($class, $action);
             $data['is_header'] = $this->doc->__get('is_header');
-            # 全局header
+            // 全局header
             $data['_header'] = $this->doc->__get('header');
-            # 全局参数
+            // 全局参数
             $data['_params'] = $this->doc->__get('params');
             return $this->totrue($data);
         } else {
@@ -188,7 +189,6 @@ class Controller
         } else {
             View::assign('data', $this->doc->__get('document')[$name]);
         }
-        // dd($this->template('doc_' . $name));
         return $this->template('doc_' . $name);
     }
     /**
@@ -240,14 +240,15 @@ class Controller
     public function login()
     {
         if (request()->isPost()) {
-            if (input('post.password') != $this->doc->__get('password')) {
+            $param = Request::param();
+            if ($param['password'] != $this->doc->__get('password')) {
                 die('<script>alert("密码错误！");window.location.href="/' . $this->route_prefix . '";</script>');
             } else {
-                session($this->route_prefix . '.is_login', input('post.password'));
-                return redirect(session($this->route_prefix . '.request_url') ?: '/' . $this->route_prefix);
+                cache($this->route_prefix . '.is_login', $param['password']);
+                return redirect(cache($this->route_prefix . '.request_url') ?: '/' . $this->route_prefix);
             }
         } else {
-            if (session($this->route_prefix . '.is_login') == $this->doc->__get('password')) {
+            if (cache($this->route_prefix . '.is_login') == $this->doc->__get('password')) {
                 header('location:/' . $this->route_prefix);
             } else {
                 return $this->template('login');
@@ -261,7 +262,7 @@ class Controller
      */
     public function outlogin()
     {
-        session($this->route_prefix . '.is_login', null);
+        cache($this->route_prefix . '.is_login', NULL);
         return redirect('/' . $this->route_prefix);
     }
 }

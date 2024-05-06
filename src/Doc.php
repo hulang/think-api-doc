@@ -141,13 +141,13 @@ class Doc
                 $reflection = new \ReflectionClass($class);
                 $doc_str = $reflection->getDocComment();
                 $doc = new Parser();
-                # 解析类
+                // 解析类
                 $class_doc = $doc->parse_class($doc_str);
                 if (!empty($class_doc)) {
                     $list[$k] = array_merge($this->classkey, $class_doc);
                     $list[$k]['class'] = $class;
                     $method = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
-                    # 过滤不需要解析的方法以及非当前类的方法(父级方法)
+                    // 过滤不需要解析的方法以及非当前类的方法(父级方法)
                     $filter_method = array_merge(['__construct'], $this->config['filter_method']);
                     foreach ($method as $key => $action) {
                         if (!in_array($action->name, $filter_method) && $action->class === $class) {
