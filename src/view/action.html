@@ -6,8 +6,8 @@
 <div class="layui-card">
   <div class="layui-tab layui-tab-brief" lay-filter="doc">
     <ul class="layui-tab-title">
-      <li class="layui-this" lay-id="detail">接口详情</li>
-      <li lay-id="debug">在线调试</li>
+      <li class="layui-this">接口详情</li>
+      <li>在线调试</li>
     </ul>
     <div class="layui-tab-content">
       <div class="layui-tab-item layui-show">
@@ -260,11 +260,16 @@ layui.use(function() {
     var layer = layui.layer;
     var $ = layui.jquery;
     var util = layui.util;
-    $.get(window.location.href, function(response) {
-        if (response.code == 200) {
-            render(tpl1.innerHTML, 'view_tpl1', response.data);
-            render(tpl2.innerHTML, 'view_tpl2', response.data);
-            render(tpl3.innerHTML, 'view_tpl3', response.data);
+    $.ajax({
+        type: 'GET',
+        url: window.location.href,
+        dataType: 'json',
+        success: function(j) {
+            if (j.code == 200) {
+                render(tpl1.innerHTML, 'view_tpl1', j.data);
+                render(tpl2.innerHTML, 'view_tpl2', j.data);
+                render(tpl3.innerHTML, 'view_tpl3', j.data);
+            }
         }
     });
 
@@ -320,6 +325,9 @@ layui.use(function() {
                     });
                 }
             });
+        },
+        saveJson:function() {
+            saveJSON();
         }
     });
 
@@ -382,7 +390,6 @@ layui.use(function() {
         $.ajax({
             url: '/{$route_prefix}/format_params',
             type: 'POST',
-            // headers: headers,
             data: data.field,
             success: function(response) {
                 if (headers) {
@@ -405,7 +412,7 @@ layui.use(function() {
                                 html += '<div class="code-json layui-form" lay-filter="formTest">';
                                 html += '<div class="code-json-btn"><input type="checkbox" name="collapsed" lay-filter="filter" lay-skin="switch" lay-text="折叠|展开" checked></div>';
                                 html += '<div class="code-json-btn"><input type="checkbox" name="withQuotes" lay-filter="filter" lay-skin="switch" lay-text="有引号|无引号" checked></div>';
-                                html += '<div class="code-json-btn"><a id="saves" href="jsvascript:;" class="layui-btn layui-btn-sm">保存到本地</a></div>';
+                                html += '<div class="code-json-btn"><a href="jsvascript:;" class="layui-btn layui-btn-sm" lay-on="saveJson">保存到本地</a></div>';
                                 html += '</div>';
                                 html += '<pre id="mier-code"></pre>';
                             } else {
@@ -449,9 +456,6 @@ layui.use(function() {
         $this.jsonViewer(writeHtml(htmlJson), arr);
         $(window).resize();
         form.render();
-    });
-    $('body').on('click', '#saves', function() {
-        saveJSON();
     });
     // json文件保存到本地
     function saveJSON() {
