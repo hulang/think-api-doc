@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="{$static_path}/layui/css/layui.css">
     <link rel="stylesheet" href="{$static_assets}/assets/json-viewer.min.css">
     <link rel="stylesheet" href="{$static_assets}/assets/style.min.css">
-    {block name="head"}
-    {/block}
+    {block name="head"}{/block}
 </head>
 
 <body style="display: none;">
@@ -31,10 +30,10 @@
             <option value="/{$route_prefix}/document?name={$key}"{:input('name')==$key ? ' selected="selected"' : ''}>├──{$v.name}</option>
             {/volist}
             {/if}
-            {volist name='menu' id='v'}
+            {volist name="menu" id="v"}
             <option value="/{$route_prefix}/module?name={$v.class}"{:input('name')==$v['class'] ? ' selected="selected"' : ''}>{$v.title}</option>
             {if(isset($v.action))}
-            {volist name='v.action' id='m'}
+            {volist name="v.action" id="m"}
             <option value="/{$route_prefix}/action?name={$m.href}"{:input('name')==$m['href'] ? ' selected="selected"' : ''}>├──{$m.title}</option>
             {/volist}
             {/if}
