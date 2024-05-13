@@ -401,7 +401,7 @@ layui.use(function() {
             data: data.field,
             success: function(response) {
                 if (headers) {
-                    for (let key in headers) {
+                    for (var key in headers) {
                         response.data.header[key] = response.data.header[key] || headers[key];
                     }
                 }
@@ -436,11 +436,11 @@ layui.use(function() {
                                 maxmin: true,
                                 content: html,
                                 success: function(obj) {
-                                    var $this = obj.children('div.layui-layer-content').children('pre');
+                                    var othis = obj.children('div.layui-layer-content').children('pre');
                                     if (!apidoc_isJson(htmlJson)) {
-                                        $this.html(htmlJson);
+                                        othis.html(htmlJson);
                                     } else {
-                                        $this.jsonViewer(writeHtml(htmlJson));
+                                        othis.jsonViewer(writeHtml(htmlJson));
                                     }
                                     $(window).resize();
                                     form.render()
@@ -460,8 +460,8 @@ layui.use(function() {
             withQuotes: data.withQuotes ? false: true,
             withLinks: false
         };
-        var $this = $(this).parents('.layui-form').siblings('pre');
-        $this.jsonViewer(writeHtml(htmlJson), arr);
+        var othis = $(this).parents('.layui-form').siblings('pre');
+        othis.jsonViewer(writeHtml(htmlJson), arr);
         $(window).resize();
         form.render();
     });
