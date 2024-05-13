@@ -14,7 +14,7 @@
     {block name="head"}{/block}
 </head>
 
-<body style="display: none;">
+<body>
 <div class="layui-layout mier-apidoc-admin">
   {block name="header"}
   <div class="layui-header">
@@ -62,13 +62,6 @@
 <script src="{$static_path}/layui/layui.js"></script>
 <script src="{$static_assets}/assets/json-viewer.min.js"></script>
 <script>
-document.onreadystatechange = function() {
-    if (document.readyState == 'complete') {
-        document.body.style.display = 'block';
-    } else {
-        document.body.style.display = 'none';
-    };
-};
 layui.use(function() {
     var element = layui.element;
     var $ = layui.jquery;
