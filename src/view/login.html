@@ -13,10 +13,10 @@
     <div class="layui-card-body">
       <form class="layui-form" action="/{$route_prefix}/login" method="post">
         <div class="layui-form-item">
-          <input type="text" name="password" required class="layui-input" placeholder="请输入登录密码">
+          <input type="text" name="password" maxlength="30" value="" lay-verify="required" class="layui-input" placeholder="请输入登录密码">
         </div>
         <div class="layui-form-item">
-          <button class="layui-btn" type="submit">登录</button>
+          <button type="submit" class="layui-btn">登录</button>
         </div>
       </form>
     </div>
