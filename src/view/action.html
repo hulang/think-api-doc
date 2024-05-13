@@ -110,7 +110,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{# layui.each(d.return,function(k, v){ }}
+                            {{# layui.each(d.return, function(k, v){ }}
                             <tr>
                                 <td>{{ v.name }}</td>
                                 <td>{{ v.type }}</td>
@@ -132,7 +132,8 @@
             <label class="layui-form-label">接口地址</label>
             <div class="layui-input-block">
                 {{# if(d.method == 'api'){ }}
-                <input type="text" name="url" required readonly="readonly" autocomplete="off" class="layui-input" value="{{ d.href ? d.href : ''}}"> {{# }else{ }}
+                <input type="text" name="url" required readonly="readonly" autocomplete="off" class="layui-input" value="{{ d.href ? d.href : ''}}">
+                {{# }else{ }}
                 <input type="text" name="url" required lay-verify="url" placeholder="请输入接口地址" autocomplete="off" class="layui-input" value="{{ d.url ? d.url : ''}}">
                 {{# } }}
             </div>
@@ -144,7 +145,7 @@
                     {{# if(d.method == 'api'){ }}
                         <option value="API" selected="selected">API</option>
                     {{# }else{ }}
-                        {{# layui.each(['GET','POST','PUT','DELETE'],function(index, item){ }}
+                        {{# layui.each(['GET', 'POST', 'PUT', 'DELETE'], function(index, item){ }}
                         <option value="{{ item }}"{{# if(item.trim()== d.method.trim()){ }} selected="selected"{{# } }}>{{ item }}</option>
                         {{# }); }}
                     {{# } }}
@@ -153,7 +154,7 @@
             <label class="layui-form-label">请求类型</label>
             <div class="layui-input-inline">
                 <select name="requestType" lay-verify="required">
-                    {{# layui.each(['JSON','HTML','XML','SCRIPT','JSONP','TEXT'],function(index, item){ }}
+                    {{# layui.each(['JSON', 'HTML', 'XML', 'SCRIPT', 'JSONP', 'TEXT'], function(index, item){ }}
                     <option value="{{ item }}"{{# if(item.trim()== 'JSON'){ }} selected="selected"{{# } }}>{{ item }}</option>
                     {{# }); }}
                 </select>
@@ -183,14 +184,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{# if(d.is_header == 1){ }} {{# layui.each(d._header,function(index, item){ }}
+                        {{# if(d.is_header == 1){ }}
+                        {{# layui.each(d._header, function(index, item){ }}
                         <tr>
                             <td><input type="text" name="header[name][]" disabled class="layui-input" value="{{ index }}">
                             </td>
                             <td><input type="text" name="header[value][]" class="layui-input" autocomplete="off" value="{{ item }}"></td>
                             <th><button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-on="del">删除</button></th>
                         </tr>
-                        {{# }); }} {{# }; }}
+                        {{# }); }}
+                        {{# }; }}
                     </tbody>
                 </table>
             </div>
@@ -217,7 +220,7 @@
                     </thead>
                     <tbody>
                         {{# if(d.is_params == 1){ }}
-                        {{# layui.each(d._params,function(index, item){ }}
+                        {{# layui.each(d._params, function(index, item){ }}
                         <tr>
                             <td><input type="text" name="params[name][]" disabled class="layui-input" autocomplete="off" value="{{ index }}">
                             </td>
@@ -227,7 +230,7 @@
                         {{# }); }}
                         {{# }; }}
                         {{# if(d.param){ }}
-                        {{# layui.each(d.param,function(index, item){ }}
+                        {{# layui.each(d.param, function(index, item){ }}
                         <tr>
                             <td><input type="text" name="params[name][]" class="layui-input" autocomplete="off" value="{{ item['name'] }}"></td>
                             <td><input type="text" name="params[value][]"{{ item.valid  == 'YES' ? ' required  lay-verify="required"' : '' }} class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
