@@ -233,7 +233,7 @@
                         {{# layui.each(d.param, function(index, item){ }}
                         <tr>
                             <td><input type="text" name="params[name][]" class="layui-input" autocomplete="off" value="{{ item['name'] }}"></td>
-                            <td><input type="text" name="params[value][]"{{ item.valid  == 'YES' ? ' required  lay-verify="required"' : '' }} class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
+                            <td><input type="text" name="params[value][]"{{ item.valid  == 'YES' ? ' required lay-verify="required"' : '' }}class="layui-input" autocomplete="off" value="{{ trim(item['default']) == '' ? '' : item['default'] }}"></td>
                             <td><button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-on="del">删除</button></td>
                         </tr>
                         {{# }); }}
