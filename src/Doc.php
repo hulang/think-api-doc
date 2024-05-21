@@ -140,9 +140,8 @@ class Doc
             if (class_exists($class)) {
                 $reflection = new \ReflectionClass($class);
                 $doc_str = $reflection->getDocComment();
-                $doc = new Parser();
                 // 解析类
-                $class_doc = $doc->parse_class($doc_str);
+                $class_doc = Parser::parse_class($doc_str);
                 if (!empty($class_doc)) {
                     $list[$k] = array_merge($this->classkey, $class_doc);
                     $list[$k]['class'] = $class;
@@ -151,9 +150,9 @@ class Doc
                     $filter_method = array_merge(['__construct'], $this->config['filter_method']);
                     foreach ($method as $key => $action) {
                         if (!in_array($action->name, $filter_method) && $action->class === $class) {
-                            $res = $doc->parse_action($action);
+                            $res = Parser::parse_action($action);
                             if ($res) {
-                                $list[$k]['action'][$key] = array_merge($this->actionkey, $doc->parse_action($action));
+                                $list[$k]['action'][$key] = array_merge($this->actionkey, Parser::parse_action($action));
                             }
                         }
                     }
@@ -173,7 +172,7 @@ class Doc
     public function get_api_detail($class = '', $action = '')
     {
         $method = (new \ReflectionClass($class))->getMethod($action);
-        $data = (new Parser())->parse_action($method);
+        $data = Parser::parse_action($method);
         return array_merge($this->actionkey, $data);
     }
 

@@ -12,23 +12,23 @@ class Parser
      *
      * @return array
      */
-    public function parse_class($object)
+    public static function parse_class($object)
     {
-        return $this->parseCommentArray($this->comment2Array($object));
+        return self::parseCommentArray(self::comment2Array($object));
     }
     /**
      * @param \ReflectionClass $object
      *
      * @return array|bool
      */
-    public function parse_action($object)
+    public static function parse_action($object)
     {
-        $comment = $this->parse_class($object);
+        $comment = self::parse_class($object);
         if (empty($comment)) {
             return;
         }
         if (!isset($comment['url']) || !$comment['url']) {
-            $buildUrl = $this->buildUrl($object);
+            $buildUrl = self::buildUrl($object);
             $comment['url'] = $buildUrl['url'];
             if (!empty($buildUrl['method'])) {
                 $comment['method'] =  $buildUrl['method'];
@@ -47,7 +47,7 @@ class Parser
      *
      * @return mixed
      */
-    private function buildUrl($object)
+    private static function buildUrl($object)
     {
         $_arr = explode('\\', strtolower($object->class));
 
@@ -73,7 +73,7 @@ class Parser
      *
      * @return array
      */
-    private function comment2Array($comment = '')
+    private static function comment2Array($comment = '')
     {
         // 多空格转换成单空格
         $comment = preg_replace('/[ ]+/', ' ', (string) $comment);
@@ -91,7 +91,7 @@ class Parser
      *
      * @return array
      */
-    private function parseCommentArray(array $array = [])
+    private static function parseCommentArray(array $array = [])
     {
         $newArr = [];
         foreach ($array as $item) {

@@ -147,9 +147,8 @@ class Controller
         if (class_exists($name)) {
             $reflection = new \ReflectionClass($name);
             $doc_str = $reflection->getDocComment();
-            $doc = new Parser();
             // 解析类
-            $class_doc = $doc->parse_class($doc_str);
+            $class_doc = Parser::parse_class($doc_str);
             View::assign('data', $class_doc);
         }
         return $this->template('module');
