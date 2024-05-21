@@ -2,7 +2,7 @@
 {block name="head"}
 {/block}
 {block name="content"}
-<div class="layui-card" id="view_tpl1"></div>
+<div class="layui-card" id="view_box_tpl"></div>
 <div class="layui-card">
   <div class="layui-tab layui-tab-brief" lay-filter="doc">
     <ul class="layui-tab-title">
@@ -11,15 +11,15 @@
     </ul>
     <div class="layui-tab-content">
       <div class="layui-tab-item layui-show">
-        <div id="view_tpl2" class="overflow"></div>
+        <div id="view_param_tpl" class="overflow"></div>
       </div>
       <div class="layui-tab-item">
-        <div id="view_tpl3" class="overflow"></div>
+        <div id="view_test_tpl" class="overflow"></div>
       </div>
     </div>
   </div>
 </div>
-<script type="text/html" id="tpl1">
+<script type="text/html" id="tpl_desc">
 <div class="layui-card-header" style="font-size: 16px">
   <blockquote class="layui-elem-quote">{{ d.title }}</blockquote>
 </div>
@@ -27,7 +27,7 @@
   <div class="layui-card-body">接口描述：{{ d.desc}} </div>
 </div>
 </script>
-<script type="text/html" id="tpl2">
+<script type="text/html" id="tpl_param">
     <table class="layui-table">
         <colgroup>
             <col width="100">
@@ -126,7 +126,7 @@
         </tbody>
     </table>
 </script>
-<script type="text/html" id="tpl3">
+<script type="text/html" id="tpl_test">
     <div class="layui-form layui-form-pane">
         <div class="layui-form-item">
             <label class="layui-form-label">接口地址</label>
@@ -274,17 +274,17 @@ layui.use(function() {
         dataType: 'json',
         success: function(j) {
             if (j.code == 200) {
-                render(tpl1.innerHTML, 'view_tpl1', j.data);
-                render(tpl2.innerHTML, 'view_tpl2', j.data);
-                render(tpl3.innerHTML, 'view_tpl3', j.data);
+                render($('#tpl_desc').html(), 'view_box_tpl', j.data);
+                render($('#tpl_param').html(), 'view_param_tpl', j.data);
+                render($('#tpl_test').html(), 'view_test_tpl', j.data);
             }
         }
     });
 
     function render(tpl, _view, data) {
-        var view = document.getElementById(_view);
+        var view = $('#' + _view);
         laytpl(tpl).render(data, function(html) {
-            view.innerHTML = html;
+            view.html(html);
         });
         form.render();
     }
