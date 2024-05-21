@@ -42,7 +42,7 @@
         </li>
       </ul>
       <ul class="layui-nav layui-layout-right">
-        <li class="layui-nav-item" id="main-full"><a href="javascript:;">全屏</a></li>
+        <li class="layui-nav-item" id="main-full" lay-on="mainFull"><a href="javascript:;">全屏</a></li>
         <li class="layui-nav-item"><a href="/{$route_prefix}">文档</a></li>
         <li class="layui-nav-item"><a href="/{$route_prefix}/outlogin">退出</a></li>
       </ul>
@@ -55,8 +55,8 @@
     <div class="site-content">{block name="content"}{/block}</div>
   </div>
   {/block}
-  <div class="site-tree-mobile layui-hide"><i class="layui-icon layui-icon-right"></i></div>
-  <div class="site-mobile-shade"></div>
+  <div class="site-tree-mobile layui-hide" lay-on="siteTreeMobile"><i class="layui-icon layui-icon-right"></i></div>
+  <div class="site-mobile-shade" lay-on="siteMobileShade"></div>
   {block name="footer"}{/block}
 </div>
 <script src="{$static_path}/layui/layui.js"></script>
@@ -65,28 +65,32 @@
 layui.use(function() {
     var element = layui.element;
     var $ = layui.jquery;
+    var util = layui.util;
     var form = layui.form;
     form.on('select(component)', function(item) {
         window.location.href = item.value;
     });
-    $('.site-tree-mobile').click(function(e) {
-        $('body').addClass('site-mobile');
-    });
-    $('.site-mobile-shade').click(function(e) {
-        $('body').removeClass('site-mobile');
+    // on
+    util.on({
+        siteTreeMobile: function () {
+            $('body').addClass('site-mobile');
+        },
+        siteMobileShade: function () {
+            $('body').removeClass('site-mobile');
+        },
+        mainFull: function () {
+            if ($('.layui-main').hasClass('main-full')) {
+                t_full();
+            } else {
+                full();
+            }
+        }
     });
     if (layui.sessionData('main').full) {
         $(document).ready(function() {
             full();
         });
     }
-    $('#main-full').click(function(e) {
-        if ($('.layui-main').hasClass('main-full')) {
-            t_full();
-        } else {
-            full();
-        }
-    });
     function t_full() {
         $('.layui-main').removeClass('main-full');
         $('.mier-main').removeClass('main-full');
