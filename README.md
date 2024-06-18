@@ -1,4 +1,4 @@
-##### ThinkPHP8 接口文档生成工具
+##### ThinkPHP 8.0.0+ API 接口文档生成工具
 
 #### 使用方法
 
@@ -27,37 +27,37 @@ namespace app\api\controller;
 class Index
 {
     /**
-     * @title   首页信息
-     * @desc    方法描述
-     * @author  橘子味的心
+     * @title 首页信息
+     * @desc 方法描述
+     * @author 橘子味的心
      * @version 1.0
-     * @method  POST
-     * @param   int id ID YES
-     * @param   int limit 10 总条数 YES
-     * @param   int page 1 当前页 YES
-     * @param   int key 查询条件 NO
-     * @return  int code 200/100 返回参数
-     * @return  string msg ok 返回信息
-     * @return  array data 返回数据
-     * @return  array other 返回数据
+     * @method POST
+     * @param int id ID YES
+     * @param int limit 10 总条数 YES
+     * @param int page 1 当前页 YES
+     * @param int key 查询条件 NO
+     * @return int code 200/100 返回参数
+     * @return string msg ok 返回信息
+     * @return array data 返回数据
+     * @return array other 返回数据
      */
     public function index()
     {
     }
     /**
-     * @title   用户信息
-     * @desc    方法描述
-     * @author  橘子味的心
+     * @title 用户信息
+     * @desc 方法描述
+     * @author 橘子味的心
      * @version 1.0
-     * @method  POST
-     * @param   int id ID YES
-     * @param   int limit 10 总条数 YES
-     * @param   int page 1 当前页 YES
-     * @param   int key 查询条件 NO
-     * @return  int code 200/100 返回参数
-     * @return  string msg ok 返回信息
-     * @return  array data 返回数据
-     * @return  array other 返回数据
+     * @method POST
+     * @param int id ID YES
+     * @param int limit 10 总条数 YES
+     * @param int page 1 当前页 YES
+     * @param int key 查询条件 NO
+     * @return int code 200/100 返回参数
+     * @return string msg ok 返回信息
+     * @return array data 返回数据
+     * @return array other 返回数据
      */
     public function user()
     {

@@ -1,6 +1,6 @@
 {
     "name": "hulang/think-api-doc",
-    "description": "ThinkPHP8 API 文档自动生成",
+    "description": "ThinkPHP 8.0.0+ API 接口文档生成工具",
     "license": "Apache-2.0",
     "keywords": [
         "ThinkPHP",
